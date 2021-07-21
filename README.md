@@ -1,2 +1,1 @@
-# otus-rdbms
-Homework for the RDBMS course at the platform OTUS
+# Домашняя работа курса "Базы данных" образовательной платформы Otus
