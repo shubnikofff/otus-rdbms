@@ -257,3 +257,40 @@
 - **product_id**, **score** - необходимо рассчитывать среднюю оценку (рейтинг) товара
 
 ## Ограничения
+
+### _Products_
+- **code** - уникальное поле
+
+### _ProductCategories_
+- **name** - уникальное поле
+
+### _Producers_
+- **name** - уникальное поле
+
+### _Prices_
+- **amount** - только положительные числа
+- **end_date** - должно быть больше **start_date**
+- **available_quantity** - только положительные числа
+
+### _Discounts_
+- **percent** - только положительные числа
+- **end_date** - должно быть больше **start_date**
+
+### _Customers_
+- **email** - уникальное поле
+
+### _Orders_
+- **order_number** - уникальное поле
+- **delivery_date** - должно быть больше **created_at**
+
+### _OrderItems_
+- **quantity** - только положительные числа
+
+### _OrderStatus_
+- **name** - уникальное поле
+
+### _PictureCategory_
+- **name** - уникальное поле
+
+### _Reviews_
+- **score** - только положительные числа
