@@ -9,8 +9,7 @@ drop database if exists shop;
 create database shop;
 
 -- Tablespace
--- drop tablespace if exists hdd_tablespace;
--- drop tablespace if exists ssd_tablespace;
---
--- create tablespace hdd_tablespace owner postgres location '1';
-
+drop tablespace if exists hdd_tablespace;
+drop tablespace if exists ssd_tablespace;
+create tablespace hdd_tablespace location '/var/lib/postgresql/ts_hdd'; -- Simulating slow storage
+create tablespace ssd_tablespace location '/var/lib/postgresql/ts_ssd'; -- Simulating fast storage
