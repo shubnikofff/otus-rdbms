@@ -6,7 +6,7 @@
       <synchronize>true</synchronize>
       <remarks>Otus training project</remarks>
       <jdbc-driver>org.postgresql.Driver</jdbc-driver>
-      <jdbc-url>jdbc:postgresql://localhost:5555/postgres</jdbc-url>
+      <jdbc-url>jdbc:postgresql://localhost:5555/shop</jdbc-url>
       <jdbc-additional-properties>
         <property name="SHOW_TEMPLATE_DATABASES" value="true" />
       </jdbc-additional-properties>
