@@ -68,7 +68,25 @@ create schema catalog
         constraint fk_discount foreign key (discount_id) references discounts (id)
     )
 
-    create index price_dates_index on prices (start_date, end_date) tablespace ssd_tablespace;
+    create index price_dates_index on prices (start_date, end_date) tablespace ssd_tablespace
+
+    create table picture_categories
+    (
+        id   smallserial primary key,
+        name varchar not null unique
+    ) tablespace ssd_tablespace
+
+    create table pictures
+    (
+        id          bigserial primary key,
+        s3_url      varchar not null,
+        entity_id   bigint,
+        category_id smallint,
+        mime_type   varchar,
+        constraint fk_category foreign key (category_id) references picture_categories (id)
+    ) tablespace ssd_tablespace
+
+    create index category_entity_index on pictures (category_id, entity_id) tablespace ssd_tablespace;
 
 -- Schema Sales
 
