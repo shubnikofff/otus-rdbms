@@ -174,3 +174,6 @@ create schema sales
     create index product_index on reviews (product_id) tablespace hdd_tablespace
 
     create index product_score_index on reviews (product_id, score) tablespace hdd_tablespace;
+
+grant all on all tables in schema catalog to catalog;
+grant all on all tables in schema sales to sales;
