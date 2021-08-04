@@ -8,9 +8,9 @@ services:
     environment:
       - POSTGRES_PASSWORD=otus
     volumes:
-      -  postgres-data/:/var/lib/postgresql/data
-      -  ts-hdd/:/var/lib/postgresql/ts_hdd
-      -  ts-ssd/:/var/lib/postgresql/ts_ssd
+      -  postgres-data:/var/lib/postgresql/data
+      -  ts-hdd:/var/lib/postgresql/ts_hdd
+      -  ts-ssd:/var/lib/postgresql/ts_ssd
 volumes:
   postgres-data:
   ts-hdd:
