@@ -1,0 +1,1 @@
+copy catalog.product_categories(name) from '/var/lib/postgresql/csv/product_categories.csv';
