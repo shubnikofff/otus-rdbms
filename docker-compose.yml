@@ -11,6 +11,7 @@ services:
       -  postgres-data:/var/lib/postgresql/data
       -  ts-hdd:/var/lib/postgresql/ts_hdd
       -  ts-ssd:/var/lib/postgresql/ts_ssd
+      - ./csv:/var/lib/postgresql/csv
 volumes:
   postgres-data:
   ts-hdd:
