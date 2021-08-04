@@ -1,4 +1,10 @@
-toys
-electronic
-health
-sport
+id, name
+1, Appliances
+2, Toys
+3, Electronics
+4, Health and Beauty
+5, Sport
+6, Books
+7, Furniture
+8, Clothing
+9, Premium
