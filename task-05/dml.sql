@@ -1,10 +1,11 @@
 truncate table catalog.product_categories, catalog.products, catalog.producers restart identity cascade;
 
+-- Пример использования утилиты COPY
 copy catalog.product_categories (id, name) from '/var/lib/postgresql/csv/product_categories.csv' with csv header;
 copy catalog.producers (id, name) from '/var/lib/postgresql/csv/producers.csv' with csv header;
 copy catalog.products (id, name, producer_id) from '/var/lib/postgresql/csv/products.csv' with csv header;
 
--- Запрос на добавление данных с выводом информации о добавленных строках.
+-- Запрос на добавление данных с выводом информации о добавленных строках
 insert into catalog.products_product_categories (product_id, category_id)
 values (1, 3),
        (2, 3),
@@ -40,3 +41,6 @@ select p.name as product, (select name from catalog.product_categories pc where 
 -- Пример запроса с INNER JOIN. Результат: найдены только те товары, которые принаддежат хотя бы к одной категории.
 -- Изменение порядка соединений не дает никакого эффекта, так как при INNER JOIN в результат попадают только те строки, которые есть в обеих таблицах и соответствуют условаию ON.
 select p.name as product, (select name from catalog.product_categories pc where pc.id = ppc.category_id) as category from catalog.products p inner join catalog.products_product_categories ppc on p.id = ppc.product_id;
+
+-- Ппример запроса на обновление данных сиспользованием UPDATE FROM
+update catalog.products p set description = trim(concat(p.description, ' Made by', v.name)) from catalog.producers v where producer_id = v.id;
