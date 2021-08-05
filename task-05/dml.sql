@@ -4,7 +4,7 @@ copy catalog.product_categories (id, name) from '/var/lib/postgresql/csv/product
 copy catalog.producers (id, name) from '/var/lib/postgresql/csv/producers.csv' with csv header;
 copy catalog.products (id, name, producer_id) from '/var/lib/postgresql/csv/products.csv' with csv header;
 
--- Создание связей между товарами и категориями
+-- Запрос на добавление данных с выводом информации о добавленных строках.
 insert into catalog.products_product_categories (product_id, category_id)
 values (1, 3),
        (2, 3),
@@ -28,6 +28,6 @@ values (1, 3),
        (14, 9),
        (15, 9),
        (16, 2)
-returning (select name from catalog.products where id = product_id) as product, (select name
-                                                                                 from catalog.product_categories
-                                                                                 where id = products_product_categories.category_id) as category;
+returning
+    (select name from catalog.products where id = product_id) as product,
+    (select name from catalog.product_categories where id = products_product_categories.category_id) as category;
