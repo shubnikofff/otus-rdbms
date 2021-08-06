@@ -44,3 +44,6 @@ select p.name as product, (select name from catalog.product_categories pc where 
 
 -- Ппример запроса на обновление данных сиспользованием UPDATE FROM
 update catalog.products p set description = trim(concat(p.description, ' Made by', v.name)) from catalog.producers v where producer_id = v.id;
+
+-- Запрос для удаления данных с оператором DELETE используя join с другой таблицей с помощью USING
+delete from catalog.products using catalog.producers where producer_id = producers.id and producers.name ~* 'apple' returning products.name, producers.name;
