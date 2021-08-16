@@ -20,7 +20,7 @@ create schema catalog
         constraint fk_producer foreign key (producer_id) references producers (id)
     ) tablespace ssd_tablespace
 
-    create index product_name_index on products (name) tablespace ssd_tablespace
+    create index products_name_idx on products (name) tablespace ssd_tablespace
 
     create table product_categories
     (
