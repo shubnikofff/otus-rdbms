@@ -16,7 +16,7 @@ create schema catalog
         code        uuid    not null unique default gen_random_uuid(),
         name        varchar not null,
         producer_id bigint,
-        description text,
+        description tsvector,
         constraint fk_producer foreign key (producer_id) references producers (id)
     ) tablespace ssd_tablespace
 
