@@ -22,3 +22,7 @@ where products.name = 'NIVEA Gift box classic';
 -- Planning Time: 0.180 ms
 -- Execution Time: 0.036 ms
 
+-- 3) Реализция индекса для полнотекстового поиска
+create index products_description_idx on catalog.products using gin(description);
+select pg_size_pretty(pg_table_size('products_description_idx'));
+explain analyze select description from catalog.products where description = 'Product'
