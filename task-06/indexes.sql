@@ -1,8 +1,11 @@
 -- 1) Создание индекса
+drop index if exists products_name_idx;
 create index products_name_idx on catalog.products using btree (name);
-create index products_producer_id_idx on catalog.products using btree (producer_id);
-analyse catalog.products;
 
+drop index if exists products_producer_id_idx;
+create index products_producer_id_idx on catalog.products using btree (producer_id);
+
+analyse catalog.products;
 select pg_size_pretty(pg_table_size('products'))                 as table_size,
        pg_size_pretty(pg_table_size('products_name_idx'))        as products_name_index_size,
        pg_size_pretty(pg_table_size('products_producer_id_idx')) as producer_id_index_size;
@@ -38,7 +41,9 @@ where products.name = 'NIVEA Gift box classic';
 
 -- 3) Реализция индекса для полнотекстового поиска
 -- Для ускорения полнотекстового поиска используется индексы GIN и GIST. В своей реализации я использовал GIN:
+drop index if exists products_description_idx;
 create index products_description_idx on catalog.products using gin (description);
+
 analyse catalog.products;
 select pg_size_pretty(pg_table_size('products_description_idx'));
 
@@ -53,3 +58,18 @@ where description @@ to_tsquery('Product');
 --         Index Cond: (description @@ to_tsquery('Product'::text))
 -- Planning Time: 0.273 ms
 -- Execution Time: 2.210 ms
+
+-- 4) Частичный индекс
+drop index if exists active_price_idx;
+-- Индекс для цен на товары, которые имеются в наличии. Таким образом отрезаем не актуальные цены, что ускоряет поиск.
+create index active_price_idx on catalog.prices(available_quantity) where available_quantity > 0;
+
+analyse catalog.prices;
+select pg_size_pretty(pg_table_size('active_price_idx'));
+
+explain analyze select available_quantity from catalog.prices where available_quantity > 0;
+
+-- Index Only Scan using active_price_idx on prices  (cost=0.42..18539.47 rows=999004 width=2) (actual time=0.017..72.593 rows=998973 loops=1)
+--   Heap Fetches: 0
+-- Planning Time: 0.078 ms
+-- Execution Time: 111.079 ms
