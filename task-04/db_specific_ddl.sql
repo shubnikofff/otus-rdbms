@@ -68,7 +68,7 @@ create schema catalog
         constraint fk_discount foreign key (discount_id) references discounts (id)
     )
 
-    create index price_dates_idx on prices (start_date, end_date) tablespace ssd_tablespace
+    create index prices_date_range_idx on prices (start_date, end_date) tablespace ssd_tablespace
 
     create table picture_categories
     (
