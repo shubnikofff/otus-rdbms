@@ -73,3 +73,21 @@ explain analyze select available_quantity from catalog.prices where available_qu
 --   Heap Fetches: 0
 -- Planning Time: 0.078 ms
 -- Execution Time: 111.079 ms
+
+-- 5) Составной индекс на несколько полей.
+drop index if exists prices_date_range_idx;
+-- Индекс на временной промежуток в течение которого валидна цена
+create index prices_date_range_idx on catalog.prices(start_date, end_date);
+
+analyze catalog.prices;
+select pg_size_pretty(pg_table_size('active_price_idx'));
+
+explain analyze select amount, start_date, end_date from catalog.prices where start_date > '2020-08-15' and end_date < '2020-08-25';
+
+-- Bitmap Heap Scan on prices  (cost=6021.98..18321.21 rows=196882 width=16) (actual time=19.599..83.485 rows=197587 loops=1)
+--   Recheck Cond: ((start_date > '2020-08-15'::date) AND (end_date < '2020-08-25'::date))
+--   Heap Blocks: exact=9346
+--   ->  Bitmap Index Scan on prices_date_range_idx  (cost=0.00..5972.76 rows=196882 width=0) (actual time=16.661..16.661 rows=197587 loops=1)
+--         Index Cond: ((start_date > '2020-08-15'::date) AND (end_date < '2020-08-25'::date))
+-- Planning Time: 0.130 ms
+-- Execution Time: 93.521 ms
