@@ -21,3 +21,20 @@ truncate table catalog.products_product_categories restart identity cascade;
 insert into catalog.products_product_categories (product_id, category_id)
 select generate_number(1, 500000), generate_number(1, 500)
 from generate_series(1, 1000000);
+
+-- suppliers
+truncate table catalog.suppliers restart identity cascade;
+insert into catalog.suppliers(name)
+select generate_text(20)
+from generate_series(1, 200000);
+
+-- prices
+truncate table catalog.prices restart identity cascade;
+insert into catalog.prices(amount, start_date, end_date, product_id, supplier_id, available_quantity)
+select generate_number(1, 500),
+       generate_date('2020-08-11', '2020-08-20'),
+       generate_date('2020-08-21', '2020-08-30'),
+       generate_number(1, 500000),
+       generate_number(1, 200000),
+       generate_number(0, 1000)
+from generate_series(1,  1000000);
