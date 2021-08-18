@@ -50,7 +50,7 @@ create schema catalog
         check ( end_date > start_date )
     )
 
-    create index discount_dates_index on discounts (start_date, end_date) tablespace ssd_tablespace
+    create index discount_dates_idx on discounts (start_date, end_date) tablespace ssd_tablespace
 
     create table prices
     (
@@ -68,7 +68,7 @@ create schema catalog
         constraint fk_discount foreign key (discount_id) references discounts (id)
     )
 
-    create index price_dates_index on prices (start_date, end_date) tablespace ssd_tablespace
+    create index price_dates_idx on prices (start_date, end_date) tablespace ssd_tablespace
 
     create table picture_categories
     (
@@ -86,7 +86,7 @@ create schema catalog
         constraint fk_category foreign key (category_id) references picture_categories (id)
     ) tablespace ssd_tablespace
 
-    create index category_entity_index on pictures (category_id, entity_id) tablespace ssd_tablespace;
+    create index category_entity_idx on pictures (category_id, entity_id) tablespace ssd_tablespace;
 
 -- Schema Sales
 
@@ -144,7 +144,7 @@ create schema sales
         constraint fk_delivery_address foreign key (delivery_address_id) references delivery_addresses (id)
     ) tablespace hdd_tablespace
 
-    create index created_date_index on orders (created_at) tablespace hdd_tablespace
+    create index created_date_idx on orders (created_at) tablespace hdd_tablespace
 
     create table order_items
     (
@@ -155,7 +155,7 @@ create schema sales
         constraint fk_price foreign key (price_id) references catalog.prices (id)
     ) tablespace hdd_tablespace
 
-    create index order_price_index on order_items (order_id, price_id) tablespace hdd_tablespace
+    create index order_price_idx on order_items (order_id, price_id) tablespace hdd_tablespace
 
     create table reviews
     (
@@ -171,9 +171,9 @@ create schema sales
         constraint fk_order foreign key (order_id) references orders (id)
     ) tablespace hdd_tablespace
 
-    create index product_index on reviews (product_id) tablespace hdd_tablespace
+    create index product_idx on reviews (product_id) tablespace hdd_tablespace
 
-    create index product_score_index on reviews (product_id, score) tablespace hdd_tablespace;
+    create index product_score_idx on reviews (product_id, score) tablespace hdd_tablespace;
 
 grant all on all tables in schema catalog to catalog;
 grant all on all tables in schema sales to sales;
