@@ -17,13 +17,6 @@
             </Attribute>
           </value>
         </entry>
-        <entry key="/task-05/product_categories.csv">
-          <value>
-            <Attribute>
-              <option name="separator" value="," />
-            </Attribute>
-          </value>
-        </entry>
         <entry key="\csv\producers.csv">
           <value>
             <Attribute>
