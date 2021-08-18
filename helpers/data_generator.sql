@@ -31,3 +31,15 @@ begin
     return result;
 end;
 $$ language plpgsql;
+
+create or replace function generate_date(min text, max text) returns date as
+$$
+declare
+    result date;
+begin
+    select (to_timestamp(min, 'YYYY-MM-DD HH:MI:SS') +
+            random() * (to_timestamp(max, 'YYYY-MM-DD HH:MI:SS') - to_timestamp(min, 'YYYY-MM-DD HH:MI:SS')))
+    into result;
+    return result;
+end;
+$$ language plpgsql;
