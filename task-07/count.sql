@@ -32,4 +32,6 @@ order by year_game;
 
 -- cte показывающее тоже самое
 with summary(year, sum) as (select year_game, sum(points) from statistic group by year_game)
-select year, sum from summary order by year;
+select year, sum
+from summary
+order by year;
