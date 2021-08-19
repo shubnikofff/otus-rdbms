@@ -24,4 +24,12 @@ values ('Mike', 1, 2018, 18),
        ('Jackie', 4, 2020, 29),
        ('Jet', 5, 2020, 27);
 
-select year_game, sum(points) from statistic group by year_game order by year_game;
+-- запрос суммы очков с группировкой и сортировкой по годам
+select year_game as year, sum(points)
+from statistic
+group by year_game
+order by year_game;
+
+-- cte показывающее тоже самое
+with summary(year, sum) as (select year_game, sum(points) from statistic group by year_game)
+select year, sum from summary order by year;
