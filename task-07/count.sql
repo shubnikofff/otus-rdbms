@@ -40,5 +40,5 @@ order by year;
 select player_name,
        year_game,
        points,
-       lag(points) over ( partition by player_name order by year_game) as last_year_points
+       lag(points) over (partition by player_name order by year_game) as last_year_points
 from statistic;
