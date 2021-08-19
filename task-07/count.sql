@@ -24,14 +24,21 @@ values ('Mike', 1, 2018, 18),
        ('Jackie', 4, 2020, 29),
        ('Jet', 5, 2020, 27);
 
--- запрос суммы очков с группировкой и сортировкой по годам
+-- запрос суммы очков с группировкой и сортировкой по годам:
 select year_game as year, sum(points)
 from statistic
 group by year_game
 order by year_game;
 
--- cte показывающее тоже самое
+-- запрос суммы очков с группировкой и сортировкой по годам с помощью cte:
 with summary(year, sum) as (select year_game, sum(points) from statistic group by year_game)
 select year, sum
 from summary
 order by year;
+
+-- вывод количества очков по всем игрокам за текущий год и за предыдущий с использованием функции LAG:
+select player_name,
+       year_game,
+       points,
+       lag(points) over ( partition by player_name order by year_game) as last_year_points
+from statistic;
