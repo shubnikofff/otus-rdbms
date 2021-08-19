@@ -24,4 +24,4 @@ values ('Mike', 1, 2018, 18),
        ('Jackie', 4, 2020, 29),
        ('Jet', 5, 2020, 27);
 
-select year_game, count(points) from statistic group by year_game order by year_game;
+select year_game, sum(points) from statistic group by year_game order by year_game;
