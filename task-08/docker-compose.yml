@@ -12,5 +12,10 @@ services:
   physical_replica:
     build: ./physical_replica
     restart: always
+    depends_on:
+      - master
+    links:
+      - master
     environment:
       - POSTGRES_PASSWORD=otus
+      - POSTGRES_HOST_AUTH_METHOD=md5

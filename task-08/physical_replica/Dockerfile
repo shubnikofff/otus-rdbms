@@ -1,5 +1,3 @@
 FROM postgres:13
-COPY ./custom-entrypoint.sh /usr/local/bin/
-RUN chmod +x /usr/local/bin/custom-entrypoint.sh
-
-ENTRYPOINT ["/usr/local/bin/docker-entrypoint.sh"]
+COPY ./init.sh /docker-entrypoint-initdb.d/
+RUN chmod +x /docker-entrypoint-initdb.d/init.sh
