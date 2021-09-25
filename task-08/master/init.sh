@@ -11,4 +11,5 @@ psql -v ON_ERROR_STOP=1 --username "$POSTGRES_USER" <<-EOSQL
         name varchar not null unique
     );
     insert into persons(name) values ('Tilly'), ('Dilly'), ('Willy');
+    create publication persons_publication for table persons;
 EOSQL
