@@ -7,7 +7,6 @@ services:
       - "5001:5432"
     environment:
       - POSTGRES_PASSWORD=otus
-      - POSTGRES_HOST_AUTH_METHOD=md5
 
   physical_replica:
     build: ./physical_replica
@@ -20,4 +19,15 @@ services:
       - master
     environment:
       - POSTGRES_PASSWORD=otus
-      - POSTGRES_HOST_AUTH_METHOD=md5
+
+  logical_replica:
+    build: ./logical_replica
+    restart: always
+    ports:
+      - "5003:5432"
+    depends_on:
+      - master
+    links:
+      - master
+    environment:
+      - POSTGRES_PASSWORD=otus
