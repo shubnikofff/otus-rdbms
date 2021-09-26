@@ -7,6 +7,7 @@ services:
       - "5001:5432"
     environment:
       - POSTGRES_PASSWORD=otus
+    command: ["-c", "config_file=/etc/postgresql/postgresql.conf"]
 
   physical_replica:
     build: ./physical_replica
