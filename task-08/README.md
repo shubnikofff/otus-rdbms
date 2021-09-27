@@ -105,3 +105,22 @@ psql -v ON_ERROR_STOP=1 --username "$POSTGRES_USER" <<-EOSQL
     publication persons_publication;
 EOSQL
 ```
+
+## Результат
+В результате получилось 2 реплики - физическая и логическая. В обоих случаях синхронизация работает без ошибок.
+
+Статистика на физической реплике:
+```sql
+select * from pg_stat_wal_receiver;
+```
+| pid | status | receive\_start\_lsn | receive\_start\_tli | written\_lsn | flushed\_lsn | received\_tli | last\_msg\_send\_time | last\_msg\_receipt\_time | latest\_end\_lsn | latest\_end\_time | slot\_name | sender\_host | sender\_port | conninfo |
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+| 35 | streaming | 0/3000000 | 1 | 0/3000588 | 0/3000588 | 1 | 2021-09-27 10:00:42.436140 +00:00 | 2021-09-27 10:00:42.436315 +00:00 | 0/3000588 | 2021-09-27 09:56:12.016202 +00:00 | otus | master | 5432 | user=postgres password=\*\*\*\*\*\*\*\* channel\_binding=prefer dbname=replication host=master port=5432 fallback\_application\_name=walreceiver sslmode=prefer sslcompression=0 ssl\_min\_protocol\_version=TLSv1.2 gssencmode=prefer krbsrvname=postgres target\_session\_attrs=any |
+
+Информация по подписке на логической реплике:
+```sql
+select * from pg_subscription;
+```
+| oid | subdbid | subname | subowner | subenabled | subconninfo | subslotname | subsynccommit | subpublications |
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+| 16397 | 16384 | persons\_subscription | 10 | true | host=master port=5432 user=postgres password=otus dbname=replica | persons\_subscription | off | {persons\_publication} |
