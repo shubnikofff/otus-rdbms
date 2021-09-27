@@ -39,7 +39,7 @@ services:
     environment:
       - POSTGRES_PASSWORD=otus
 ```
-##Master
+## Master
 Мастер запускается с кастомными файлами конфигурации [postgresql.conf](./master/postgresql.conf) и [pg_hba.conf](./master/pg_hba.conf):
 
 ### postgresql.conf
