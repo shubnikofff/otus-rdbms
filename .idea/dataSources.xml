@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
-    <data-source source="LOCAL" name="PostgreSQL - postgres@localhost" uuid="cd3f3815-bc69-4a73-8c3d-691915a4a456">
+    <data-source source="LOCAL" name="Shop" uuid="cd3f3815-bc69-4a73-8c3d-691915a4a456">
       <driver-ref>postgresql</driver-ref>
       <synchronize>true</synchronize>
       <remarks>Otus training project</remarks>
@@ -12,25 +12,32 @@
       </jdbc-additional-properties>
       <working-dir>$ProjectFileDir$</working-dir>
     </data-source>
-    <data-source source="LOCAL" name="master" uuid="b2504a9e-2963-4760-bdc1-b7830ca37ff6">
+    <data-source source="LOCAL" name="Master" uuid="b2504a9e-2963-4760-bdc1-b7830ca37ff6">
       <driver-ref>postgresql</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>org.postgresql.Driver</jdbc-driver>
       <jdbc-url>jdbc:postgresql://localhost:5001/replica</jdbc-url>
       <working-dir>$ProjectFileDir$</working-dir>
     </data-source>
-    <data-source source="LOCAL" name="physical_replica" uuid="76592525-9b20-4592-8f00-3972b345422c">
+    <data-source source="LOCAL" name="Physical replica" uuid="76592525-9b20-4592-8f00-3972b345422c">
       <driver-ref>postgresql</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>org.postgresql.Driver</jdbc-driver>
       <jdbc-url>jdbc:postgresql://localhost:5002/replica</jdbc-url>
       <working-dir>$ProjectFileDir$</working-dir>
     </data-source>
-    <data-source source="LOCAL" name="logical_replica" uuid="8d63b2de-4148-4c22-9ab0-db65c89421a3">
+    <data-source source="LOCAL" name="Lgical replica" uuid="8d63b2de-4148-4c22-9ab0-db65c89421a3">
       <driver-ref>postgresql</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>org.postgresql.Driver</jdbc-driver>
       <jdbc-url>jdbc:postgresql://localhost:5003/replica</jdbc-url>
+      <working-dir>$ProjectFileDir$</working-dir>
+    </data-source>
+    <data-source source="LOCAL" name="MySQL" uuid="329be537-9ae6-4b16-bdfe-93e2a6ed479c">
+      <driver-ref>mysql.8</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>com.mysql.cj.jdbc.Driver</jdbc-driver>
+      <jdbc-url>jdbc:mysql://localhost:3306</jdbc-url>
       <working-dir>$ProjectFileDir$</working-dir>
     </data-source>
   </component>
