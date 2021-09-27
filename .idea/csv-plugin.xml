@@ -17,13 +17,6 @@
             </Attribute>
           </value>
         </entry>
-        <entry key="/dumpDataPreview">
-          <value>
-            <Attribute>
-              <option name="separator" value="," />
-            </Attribute>
-          </value>
-        </entry>
         <entry key="\csv\producers.csv">
           <value>
             <Attribute>
