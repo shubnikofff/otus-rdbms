@@ -8,5 +8,8 @@ services:
       - "3306:3306"
     volumes:
       - mysql-data:/var/lib/mysql
+      - ./init.sql:/init.sql
+    command:
+      --init-file /init.sql
 volumes:
   mysql-data:
