@@ -9,8 +9,6 @@ services:
       - "3306:3306"
     volumes:
       - mysql-data:/var/lib/mysql
-      - ./init.sql:/init.sql
-    command:
-      --init-file /init.sql
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
 volumes:
   mysql-data:
