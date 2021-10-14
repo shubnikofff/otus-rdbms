@@ -81,26 +81,17 @@ create table prices
 
 create index prices_date_range_idx on prices (start_date, end_date);
 
-# TODO: try to past negative value
-create table picture_categories
-(
-    id   smallint     not null auto_increment,
-    name varchar(500) not null unique,
-    primary key (id)
-);
-
 create table pictures
 (
-    id          serial,
-    s3_url      varchar(1000) not null,
-    entity_id   bigint,
-    category_id smallint,
-    mime_type   varchar(50),
-    primary key (id),
-    constraint fk_picture_category foreign key (category_id) references picture_categories (id)
+    id        serial,
+    s3_url    varchar(1000) not null,
+    entity_id bigint,
+    category  enum ('avatar', 'product', 'review'),
+    mime_type varchar(50),
+    primary key (id)
 ) tablespace ssd_tablespace;
 
-create index category_entity_idx on pictures (category_id, entity_id);
+create index category_entity_idx on pictures (category, entity_id);
 
 create table customers
 (
@@ -133,13 +124,6 @@ create table customers_delivery_addresses
     constraint fk_category_delivery_address foreign key (address_id) references delivery_addresses (id) on delete cascade
 ) tablespace hdd_tablespace;
 
-create table order_statuses
-(
-    id   smallint    auto_increment,
-    name varchar(50) not null unique,
-    primary key (id)
-) tablespace hdd_tablespace;
-
 create table orders
 (
     id                  serial,
@@ -147,12 +131,11 @@ create table orders
     created_at          date        not null,
     customer_comment    text,
     customer_id         bigint unsigned,
-    status_id           smallint unsigned not null,
+    status              enum ('created', 'paid', 'preparing', 'delivering', 'done'),
     delivery_address_id bigint unsigned,
     delivery_date       date        not null,
     primary key (id),
     constraint fk_customer foreign key (customer_id) references customers (id),
-#     constraint fk_status foreign key (status_id) references order_statuses (id),
     constraint fk_delivery_address foreign key (delivery_address_id) references delivery_addresses (id)
 ) tablespace hdd_tablespace;
 
