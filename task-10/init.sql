@@ -100,7 +100,7 @@ create table customers
     password   varchar(50) not null,
     name       varchar(100),
     contact    varchar(500),
-    last_visit date,
+    last_visit datetime,
     primary key (id)
 ) tablespace hdd_tablespace;
 
@@ -127,13 +127,14 @@ create table customers_delivery_addresses
 create table orders
 (
     id                  serial,
-    order_number        varchar(50) not null,
-    created_at          date        not null,
+    order_number        varchar(50)     not null,
+    created_at          datetime                                                    default now(),
     customer_comment    text,
-    customer_id         bigint unsigned,
-    status              enum ('created', 'paid', 'preparing', 'delivering', 'done'),
-    delivery_address_id bigint unsigned,
-    delivery_date       date        not null,
+    customer_id         bigint unsigned not null,
+    status              enum ('created', 'paid', 'preparing', 'delivering', 'done') default 'created',
+    delivery_address_id bigint unsigned not null,
+    delivery_date       date,
+    items               json            not null,
     primary key (id),
     constraint fk_customer foreign key (customer_id) references customers (id),
     constraint fk_delivery_address foreign key (delivery_address_id) references delivery_addresses (id)
