@@ -142,17 +142,6 @@ create table orders
 
 create index created_date_idx on orders (created_at);
 
-create table order_items
-(
-    order_id bigint unsigned not null,
-    price_id bigint unsigned not null,
-    quantity smallint        not null check ( quantity > 0 ),
-    constraint fk_order foreign key (order_id) references orders (id),
-    constraint fk_price foreign key (price_id) references prices (id)
-) tablespace hdd_tablespace;
-
-create index order_price_idx on order_items (order_id, price_id);
-
 create table reviews
 (
     id          serial,
