@@ -22,9 +22,23 @@
 insert into orders(order_number, created_at, customer_id, status, delivery_address_id, delivery_date, items)
 values ('A001', now(), 1, 'created', 1, curdate() + 7, 
     json_array(
-        json_object('product', json_object('id', 1, 'name', 'headphones', 'supplier', 'Digital goods LLC'), 'price', 110.50, 'discount', 0.1, 'quantity', 2),
-        json_object('product', json_object('id', 2, 'name', 'PS4 console', 'supplier', 'Satoshkin LLC'), 'price', 450.90, 'discount', 0.2, 'quantity', 1),
-        json_object('product', json_object('id', 3, 'name', 'PS4 VR pack', 'supplier', 'Satoshkin LLC'), 'price', 320.0, 'quantity', 1)
+        json_object(
+            'product', json_object('id', 1, 'name', 'headphones', 'supplier', 'Digital goods LLC'), 
+            'price', 110.50, 
+            'discount', 0.1, 
+            'quantity', 2
+        ),
+        json_object(
+            'product', json_object('id', 2, 'name', 'PS4 console', 'supplier', 'Satoshkin LLC'), 
+            'price', 450.90, 
+            'discount', 0.2, 
+            'quantity', 1
+        ),
+        json_object(
+            'product', json_object('id', 3, 'name', 'PS4 VR pack', 'supplier', 'Satoshkin LLC'),
+            'price', 320.0,
+            'quantity', 1
+        )
     )
 );
 ```
