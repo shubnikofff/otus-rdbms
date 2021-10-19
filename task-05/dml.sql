@@ -39,7 +39,13 @@ select * from catalog.products where name ~* '(sony|apple)+';
 -- Пример запроса с использованием LEFT JOIN. Результат: найдены все товары и их категории, если такие имеются. Если поменять порядок соединений в FROM, то будут найдены только те товары, которые принаддежат хотя бы к одной категории.
 -- Это происходит потому, что в результат поиска попадают все строки из левой таблицы и соответсвующие усдловию в ON строки из правой.
 -- Соответственно товары, для которых не было найдено категории в результат не попадут.
-select p.name as product, (select name from catalog.product_categories pc where pc.id = ppc.category_id) as category from catalog.products p left join catalog.products_product_categories ppc on p.id = ppc.product_id;
+select p.name as product, (select name from catalog.product_categories pc where pc.id = ppc.category_id) as category
+from catalog.products p left join catalog.products_product_categories ppc on p.id = ppc.product_id;
+
+select name, count(ppc.category_id) as category_count
+from catalog.products p left join catalog.products_product_categories ppc on p.id = ppc.product_id
+group by p.name having count(ppc.category_id) > 1
+order by p.name;
 
 -- Пример запроса с INNER JOIN. Результат: найдены только те товары, которые принаддежат хотя бы к одной категории.
 -- Изменение порядка соединений не дает никакого эффекта, так как при INNER JOIN в результат попадают только те строки, которые есть в обеих таблицах и соответствуют условаию ON.
