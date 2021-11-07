@@ -11,7 +11,7 @@ alter table promotions partition by range (region_id) (
 );
 ```
 
-Рузультат звпроса
+Рузультат запроса
 ```sql
 select p.PARTITION_NAME, p.TABLE_ROWS FROM information_schema.PARTITIONS p where TABLE_NAME = 'promotions';
 ```
