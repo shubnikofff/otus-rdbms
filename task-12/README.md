@@ -15,6 +15,14 @@ from products p inner join products_product_categories ppc on p.id = ppc.product
 
 2. Пример запроса с `left join`:
 ```sql
-select p.name as product, (select name from product_categories pc where pc.id = ppc.category_id) as category
-from products p left join products_product_categories ppc on p.id = ppc.product_id;
+select
+       o.order_number,
+       o.created_at,
+       o.created_at,
+       o.status,
+       o.items,
+       c.name,
+       c.contact,
+       (select concat_ws(' ', da.country, da.city, da.street, da.building) from delivery_addresses da where da.id = o.delivery_address_id) as delivery_address
+from orders o left join customers c on c.id = o.customer_id;
 ```
