@@ -12,3 +12,9 @@
 select p.name as product, (select name from product_categories pc where pc.id = ppc.category_id) as category
 from products p inner join products_product_categories ppc on p.id = ppc.product_id;
 ```
+
+2. Пример запроса с `left join`:
+```sql
+select p.name as product, (select name from product_categories pc where pc.id = ppc.category_id) as category
+from products p left join products_product_categories ppc on p.id = ppc.product_id;
+```
